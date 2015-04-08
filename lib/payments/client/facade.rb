@@ -21,6 +21,13 @@ module Payments
         perform(CreateFinancialContext, params)
       end
 
+      def update_merchants_in_financial_context(params)
+        perform(
+          UpdateMerchantsInFinancialContext,
+          params.merge(financial_context_id: params["financial_context_id"]),
+        )
+      end
+
       def request_receipt_number(order_id)
         perform(RequestReceiptNumber, order_id: order_id)
       end

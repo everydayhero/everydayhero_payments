@@ -15,5 +15,13 @@ module Payments
         "/financial-contexts"
       end
     end
+
+    class UpdateMerchantsInFinancialContext < Operation
+      include PutOperation
+
+      def path
+        "/financial-contexts/{financial_context_id}/merchants"
+      end
+    end
   end
 end
