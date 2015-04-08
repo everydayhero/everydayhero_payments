@@ -1,19 +1,23 @@
-require "excon"
-require "hashie"
-require "json"
 require "securerandom"
 require "uri_config"
 
 require "payments/client/version"
 require "payments/client/config"
 require "payments/client/facade"
-require "payments/client/http"
+require "payments/client/gateway"
 require "payments/client/operations"
 
 require "payments/client/railtie" if defined?(Rails)
 
 module Payments
   module Client
+    ENDPOINT = ENV.fetch("PAYMENTS_API_URL") do
+      "https://payments.everydayhero.io/api"
+    end
+    GATEWAY_ALIASES = {
+      http: :excon,
+    }
+
     def self.request_id=(value)
       @request_id = value
     end
@@ -22,36 +26,16 @@ module Payments
       @request_id ||= SecureRandom.uuid
     end
 
-    def self.v1
-      V1.new
-    end
+    # @example
+    #     client = Payments::Client.v1
+    #     client = Payments::Client.v1(:rack, Payments::Application)
+    #
+    #     client.get_merchant(merchant_id)
+    def self.v1(name, *gateway_options)
+      name = GATEWAY_ALIASES[name] || name
+      gateway = Gateway.new(name, Config.new(ENDPOINT), *gateway_options)
 
-    class V1
-      ENDPOINT = ENV.fetch("PAYMENTS_API_URL") do
-        "https://payments.everydayhero.io/api"
-      end
-
-      # Returns a thin wrapper around the Payments HTTP API.
-      #
-      # @param url [String] location of Payments API
-      # @return [Payments::Client::HTTP]
-      # @example
-      #     http = Payments::Client.v1.http
-      #     puts http.get("/merchants/{id}")
-      def http(url = ENDPOINT)
-        HTTP.new(Config.new(url).config)
-      end
-
-      # Returns a high level wrapper around the Payments HTTP API.
-      #
-      # @param url [String] location of Payments API
-      # @return [Payments::Client::Facade]
-      # @example
-      #     client = Payments::Client.v1.facade
-      #     puts client.get_merchant(id)
-      def facade(*args)
-        Facade.new(http(*args))
-      end
+      Facade.new(gateway)
     end
   end
 end

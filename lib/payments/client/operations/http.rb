@@ -7,13 +7,11 @@ module Payments
 
       def call(other_options = {})
         my_options = options.merge(other_options)
-        response = @gateway.public_send(
+        @gateway.public_send(
           method,
           actual_path(my_options),
           my_options,
         )
-
-        JSON.parse(response.body)
       end
 
       private

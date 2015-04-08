@@ -1,12 +1,12 @@
 module Payments
   module Client
     class Facade
-      def initialize(http)
-        @http = http
+      def initialize(gateway)
+        @gateway = gateway
       end
 
-      def create_merchant(options)
-        perform(CreateMerchant, options)
+      def create_merchant(params)
+        perform(CreateMerchant, params)
       end
 
       def get_merchant(merchant_id)
@@ -40,11 +40,7 @@ module Payments
       private
 
       def perform(operation, options = {})
-        result(operation.new(@http).call(options))
-      end
-
-      def result(response)
-        Hashie::Mash.new(response)
+        operation.new(@gateway).call(options)
       end
     end
   end
