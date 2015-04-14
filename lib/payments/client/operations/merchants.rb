@@ -15,5 +15,13 @@ module Payments
         "/merchants/{merchant_id}"
       end
     end
+
+    class GetMerchantFinancialReports < Operation
+      include GetOperation
+
+      def path
+        "/financial-reports"
+      end
+    end
   end
 end

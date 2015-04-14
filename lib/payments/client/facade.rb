@@ -13,6 +13,10 @@ module Payments
         perform(GetMerchant, merchant_id: merchant_id)
       end
 
+      def get_merchant_financial_reports(merchant_id)
+        perform(GetMerchantFinancialReports, merchant_id: merchant_id)
+      end
+
       def get_financial_context(financial_context_id)
         perform(GetFinancialContext, financial_context_id: financial_context_id)
       end
