@@ -31,7 +31,7 @@ module Payments
     #     client = Payments::Client.v1(:rack, Payments::Application)
     #
     #     client.get_merchant(merchant_id)
-    def self.v1(name, *gateway_options)
+    def self.v1(name = :http, *gateway_options)
       name = GATEWAY_ALIASES[name] || name
       gateway = Gateway.new(name, Config.new(ENDPOINT), *gateway_options)
 
