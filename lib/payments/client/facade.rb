@@ -32,8 +32,12 @@ module Payments
         )
       end
 
-      def request_receipt_number(order_id)
-        perform(RequestReceiptNumber, order_id: order_id)
+      def request_receipt_number(region_code, order_id)
+        perform(
+          RequestReceiptNumber,
+          region_code: region_code,
+          order_id: order_id,
+        )
       end
 
       def get_receipt_number(order_id)
