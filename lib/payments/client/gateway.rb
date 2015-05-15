@@ -14,8 +14,12 @@ module Payments
 
       %i(get post put).each do |verb|
         define_method(verb) do |path, params = nil|
-          connection.public_send(verb, prefix(path), params) do |request|
-            request.headers["X-Request-Id"] = Payments::Client.request_id
+          begin
+            connection.public_send(verb, prefix(path), params) do |request|
+              request.headers["X-Request-Id"] = Payments::Client.request_id
+            end
+          rescue Faraday::Error
+            raise Payments::Client::Error
           end
         end
       end

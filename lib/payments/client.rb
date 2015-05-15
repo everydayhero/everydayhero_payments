@@ -17,6 +17,7 @@ module Payments
     GATEWAY_ALIASES = {
       http: :excon,
     }
+    Error = Class.new(StandardError)
 
     def self.request_id=(value)
       @request_id = value
