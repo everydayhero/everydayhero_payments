@@ -36,6 +36,7 @@ module Payments
           connection.response :mashify
           connection.response :dates
           connection.response :json
+          connection.basic_auth @config.username, @config.password
           connection.use :instrumentation, name: "client.payments"
           connection.adapter @adapter, *@adapter_options
         end
