@@ -31,7 +31,7 @@ module Payments
     #     client.get_merchant(merchant_id)
     def self.v1(name = :http, *gateway_options)
       name = GATEWAY_ALIASES[name] || name
-      config = Config.new(ENV.fetch("PAYMENTS_API_KEY"))
+      config = Config.new(ENV.fetch("PAYMENTS_API_URL"))
       gateway = Gateway.new(name, config, *gateway_options)
 
       Facade.new(gateway)
