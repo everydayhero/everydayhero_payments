@@ -52,6 +52,13 @@ module Payments
         )
       end
 
+      def get_donation_transaction_detail_report(settlement_id)
+        perform(
+          GetDonationTransactionDetailReport,
+          settlement_id: settlement_id,
+        )
+      end
+
       private
 
       def perform(operation, options = {})
