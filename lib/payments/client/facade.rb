@@ -59,9 +59,9 @@ module Payments
         )
       end
 
-      def get_donation_transaction_detail_report_for_account(settlement_id, account_id)
+      def get_account_donation_transaction_detail_report(settlement_id, account_id)
         perform(
-          GetDonationTransactionDetailReportForAccount,
+          GetAccountDonationTransactionDetailReport,
           settlement_id: settlement_id,
           account_id: account_id,
         )

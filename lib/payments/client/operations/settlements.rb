@@ -8,7 +8,7 @@ module Payments
       end
     end
 
-    class GetDonationTransactionDetailReportForAccount
+    class GetAccountDonationTransactionDetailReport
       include GetOperation
 
       def path
