@@ -7,5 +7,13 @@ module Payments
         "/settlements/{settlement_id}/donation-transaction-detail-report"
       end
     end
+
+    class GetAccountDonationTransactionDetailReport
+      include GetOperation
+
+      def path
+        "/settlements/{settlement_id}/{account_id}/donation-transaction-detail-report"
+      end
+    end
   end
 end
