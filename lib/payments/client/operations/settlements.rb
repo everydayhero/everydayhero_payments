@@ -12,7 +12,7 @@ module Payments
       include GetOperation
 
       def path
-        "/settlements/{settlement_id}/{account_id}/donation-transaction-detail-report"
+        "/settlements/{settlement_id}/donation-transaction-detail-report/{account_id}"
       end
     end
   end
