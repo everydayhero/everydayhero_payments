@@ -67,6 +67,14 @@ module Payments
         )
       end
 
+      def get_account_statement(settlement_id, account_id)
+        perform(
+          GetAccountStatement,
+          settlement_id: settlement_id,
+          account_id: account_id,
+        )
+      end
+
       private
 
       def perform(operation, options = {})

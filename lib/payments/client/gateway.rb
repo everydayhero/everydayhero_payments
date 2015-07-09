@@ -6,10 +6,11 @@ require "faraday_middleware"
 module Payments
   module Client
     class Gateway
-      def initialize(adapter, config, *adapter_options)
+      def initialize(adapter, config, *adapter_options, connection: nil)
         @config = config
         @adapter = adapter
         @adapter_options = adapter_options
+        @connection = connection
       end
 
       %i(get post put).each do |verb|
@@ -24,6 +25,22 @@ module Payments
         end
       end
 
+      def with_middleware(keep: true, response: nil)
+        new_connection = connection.dup
+        new_connection.build(keep: keep) do |builder|
+          Array(response).each do |middleware|
+            builder.response middleware
+          end
+        end
+
+        self.class.new(
+          @adapter,
+          @config,
+          *@adapter_options,
+          connection: new_connection,
+        )
+      end
+
       private
 
       def prefix(path)
@@ -33,9 +50,6 @@ module Payments
       def connection
         @connection ||= Faraday.new(url: @config.host) do |connection|
           connection.request :json
-          connection.response :mashify
-          connection.response :dates
-          connection.response :json
           connection.basic_auth @config.username, @config.password
           connection.use :instrumentation, name: "client.payments"
           connection.adapter @adapter, *@adapter_options

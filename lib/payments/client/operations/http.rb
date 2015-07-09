@@ -14,6 +14,16 @@ module Payments
         )
       end
 
+      protected
+
+      def with_middleware(*args)
+        previous_gateway = @gateway
+        @gateway = @gateway.with_middleware(*args)
+        yield
+      ensure
+        @gateway = previous_gateway
+      end
+
       private
 
       def options
@@ -30,18 +40,24 @@ module Payments
     end
 
     module GetOperation
+      include DefaultMiddleware
+
       def method
         :get
       end
     end
 
     module PostOperation
+      include DefaultMiddleware
+
       def method
         :post
       end
     end
 
     module PutOperation
+      include DefaultMiddleware
+
       def method
         :put
       end

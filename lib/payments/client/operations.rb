@@ -1,3 +1,4 @@
+require "payments/client/operations/middleware"
 require "payments/client/operations/http"
 require "payments/client/operations/merchants"
 require "payments/client/operations/financial_contexts"
