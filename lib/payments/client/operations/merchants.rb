@@ -4,7 +4,7 @@ module Payments
       include PostOperation
 
       def path
-        "/merchants"
+        "/merchants/onboard_merchant"
       end
     end
 

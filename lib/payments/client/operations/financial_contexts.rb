@@ -12,15 +12,15 @@ module Payments
       include PostOperation
 
       def path
-        "/financial-contexts"
+        "/financial-contexts/notice_financial_context"
       end
     end
 
     class UpdateMerchantsInFinancialContext < Operation
-      include PutOperation
+      include PostOperation
 
       def path
-        "/financial-contexts/{financial_context_id}/merchants"
+        "/financial-contexts/change_merchants_in_financial_context"
       end
     end
   end
