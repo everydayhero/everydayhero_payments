@@ -8,6 +8,14 @@ module Payments
       end
     end
 
+    class UpdateMerchant < Operation
+      include PostOperation
+
+      def path
+        "/merchants/update_merchant_attributes"
+      end
+    end
+
     class GetMerchant < Operation
       include GetOperation
 

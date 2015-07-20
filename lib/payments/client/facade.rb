@@ -9,6 +9,10 @@ module Payments
         perform(CreateMerchant, params)
       end
 
+      def update_merchant(params)
+        perform(UpdateMerchant, params)
+      end
+
       def get_merchant(merchant_id)
         perform(GetMerchant, merchant_id: merchant_id)
       end
@@ -26,10 +30,7 @@ module Payments
       end
 
       def update_merchants_in_financial_context(params)
-        perform(
-          UpdateMerchantsInFinancialContext,
-          params.merge(financial_context_id: params["financial_context_id"]),
-        )
+        perform(UpdateMerchantsInFinancialContext, params)
       end
 
       def request_receipt_number(region_code, order_id)
