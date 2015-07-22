@@ -1,13 +1,15 @@
 require "thor"
 require "payments/client"
+require 'pp'
 
 module Payments
   class CLI < Thor
-    CLIENT = Client.v1.facade
+    CLIENT = Client.v1
 
     desc "get_merchant MERCHANT_ID", "get a merchant by MERCHANT_ID"
     def get_merchant(merchant_id)
       response = CLIENT.get_merchant(merchant_id)
+      response = response.body
 
       table = []
       table << ["ID", response.merchant_id]
@@ -16,6 +18,20 @@ module Payments
       table << ["Financial Contexts", response.financial_context_ids.join(", ")]
 
       print_table table
+    end
+
+    desc "get_donation_transaction_detail_report SETTLEMENT_ID", "nope"
+    def get_donation_transaction_detail_report(settlement_id)
+      response = CLIENT.get_donation_transaction_detail_report(settlement_id)
+
+      pp response.body.map(&:to_hash)
+    end
+
+    desc "get_account_donation_transaction_detail_report SETTLEMENT_ID", "nope"
+    def get_account_donation_transaction_detail_report(settlement_id, account_id)
+      response = CLIENT.get_account_donation_transaction_detail_report(settlement_id, account_id)
+
+      pp response.body.map(&:to_hash)
     end
 
     desc "get_receipt_number ORDER_ID", "get a receipt number by ORDER_ID"
