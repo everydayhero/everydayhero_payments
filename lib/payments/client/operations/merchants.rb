@@ -4,7 +4,15 @@ module Payments
       include PostOperation
 
       def path
-        "/merchants"
+        "/merchants/onboard_merchant"
+      end
+    end
+
+    class UpdateMerchant < Operation
+      include PostOperation
+
+      def path
+        "/merchants/update_merchant_attributes"
       end
     end
 
