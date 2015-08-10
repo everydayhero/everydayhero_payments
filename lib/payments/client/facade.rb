@@ -76,6 +76,10 @@ module Payments
         )
       end
 
+      def change_order_extra_data(params)
+        perform(ChangeOrderExtraData, params)
+      end
+
       private
 
       def perform(operation, options = {})
