@@ -80,6 +80,10 @@ module Payments
         perform(ChangeOrderExtraData, params)
       end
 
+      def place_order(params)
+        perform(PlaceOrder, params)
+      end
+
       private
 
       def perform(operation, options = {})
