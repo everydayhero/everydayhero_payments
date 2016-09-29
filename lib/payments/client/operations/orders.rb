@@ -1,5 +1,13 @@
 module Payments
   module Client
+    class RequestOrderVoid < Operation
+      include PostOperation
+
+      def path
+        "/orders/request_order_void"
+      end
+    end
+
     class ChangeOrderExtraData < Operation
       include PostOperation
 

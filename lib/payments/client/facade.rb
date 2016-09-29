@@ -84,6 +84,10 @@ module Payments
         perform(PlaceOrder, params)
       end
 
+      def request_order_void(params)
+        perform(RequestOrderVoid, params)
+      end
+
       private
 
       def perform(operation, options = {})
