@@ -53,6 +53,14 @@ module Payments
         )
       end
 
+      def get_pricing(financial_context_id, merchant_id)
+        perform(
+          GetPricing,
+          financial_context_id: financial_context_id,
+          merchant_id: merchant_id,
+        )
+      end
+
       def get_donation_transaction_detail_report(settlement_id)
         perform(
           GetDonationTransactionDetailReport,
