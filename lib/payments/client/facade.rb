@@ -88,6 +88,10 @@ module Payments
         perform(RequestOrderVoid, params)
       end
 
+      def get_fees(manifest)
+        perform(GetFees, manifest: manifest)
+      end
+
       private
 
       def perform(operation, options = {})
