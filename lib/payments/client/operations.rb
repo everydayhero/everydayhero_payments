@@ -1,6 +1,7 @@
 require "payments/client/operations/middleware"
 require "payments/client/operations/http"
 require "payments/client/operations/merchants"
+require "payments/client/operations/fees"
 require "payments/client/operations/financial_contexts"
 require "payments/client/operations/receipt_numbers"
 require "payments/client/operations/pricing_schedule"
