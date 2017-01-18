@@ -19,8 +19,8 @@ module Payments
             connection.public_send(verb, prefix(path), params) do |request|
               request.headers["X-Request-Id"] = Payments::Client.request_id
             end
-          rescue Faraday::Error
-            raise Payments::Client::Error
+          rescue Faraday::Error => e
+            raise Payments::Client::Error.new(e.message)
           end
         end
       end
