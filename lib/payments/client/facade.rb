@@ -84,6 +84,14 @@ module Payments
         perform(PlaceOrder, params)
       end
 
+      def fund_order_via_tns_with_fees(params)
+        perform(FundOrderViaTNSWithFees, params)
+      end
+
+      def fund_order_via_tns_without_fees(params)
+        perform(FundOrderViaTNSWithoutFees, params)
+      end
+
       def request_order_void(params)
         perform(RequestOrderVoid, params)
       end
