@@ -16,6 +16,22 @@ module Payments
       end
     end
 
+    class FundOrderViaTNSWithFees < Operation
+      include PostOperation
+
+      def path
+        "/orders/fund_order_via_tns_with_applied_fees"
+      end
+    end
+
+    class FundOrderViaTNSWithoutFees < Operation
+      include PostOperation
+
+      def path
+        "/orders/fund_order_via_tns_without_applied_fees"
+      end
+    end
+
     class PlaceOrder < Operation
       include PostOperation
 
