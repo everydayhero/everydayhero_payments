@@ -23,5 +23,13 @@ module Payments
         "/financial-contexts/change_merchants_in_financial_context"
       end
     end
+
+    class ChangeFinancialContextContract < Operation
+      include PostOperation
+
+      def path
+        "/financial-contexts/change_financial_context_contract"
+      end
+    end
   end
 end
