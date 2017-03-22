@@ -33,6 +33,10 @@ module Payments
         perform(UpdateMerchantsInFinancialContext, params)
       end
 
+      def change_financial_context_contract(params)
+        perform(ChangeFinancialContextContract, params)
+      end
+
       def request_receipt_number(region_code, order_id)
         perform(
           RequestReceiptNumber,
