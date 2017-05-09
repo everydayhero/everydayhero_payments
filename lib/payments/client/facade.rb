@@ -88,6 +88,10 @@ module Payments
         perform(PlaceOrder, params)
       end
 
+      def fund_order(params)
+        perform(FundOrder, params)
+      end
+
       def fund_order_via_tns_with_fees(params)
         perform(FundOrderViaTNSWithFees, params)
       end
