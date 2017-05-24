@@ -7,5 +7,13 @@ module Payments
         "/financial-contexts/{financial_context_id}/{merchant_id}/pricing-schedule"
       end
     end
+
+    class GetPricing < Operation
+      include GetOperation
+
+      def path
+        "/salamander/pricing"
+      end
+    end
   end
 end
