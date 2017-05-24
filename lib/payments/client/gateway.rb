@@ -51,6 +51,7 @@ module Payments
         @connection ||= Faraday.new(url: @config.host) do |connection|
           connection.request :json
           connection.basic_auth @config.username, @config.password
+          connection.use Faraday::Response::RaiseError
           connection.use :instrumentation, name: "client.payments"
           connection.adapter @adapter, *@adapter_options
         end
