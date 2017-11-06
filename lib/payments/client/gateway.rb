@@ -20,6 +20,8 @@ module Payments
               request.headers['Accept'] = 'application/json'
               request.headers["X-Request-Id"] = Payments::Client.request_id
             end
+          rescue Faraday::ResourceNotFound => e
+            Hashie::Mash.new(e.response)
           rescue Faraday::Error => e
             raise Payments::Client::Error.new(e.message)
           end
