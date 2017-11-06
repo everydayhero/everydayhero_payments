@@ -17,8 +17,11 @@ module Payments
         define_method(verb) do |path, params = nil|
           begin
             connection.public_send(verb, prefix(path), params) do |request|
+              request.headers['Accept'] = 'application/json'
               request.headers["X-Request-Id"] = Payments::Client.request_id
             end
+          rescue Faraday::ResourceNotFound => e
+            Hashie::Mash.new(e.response)
           rescue Faraday::Error => e
             raise Payments::Client::Error.new(e.message)
           end
