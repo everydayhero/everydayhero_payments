@@ -4,7 +4,7 @@ module Payments
       include GetOperation
 
       def path
-        "/receipt-enrichment/{receipt_number}"
+        "/receipt-enrichment/{order_id}"
       end
     end
   end
