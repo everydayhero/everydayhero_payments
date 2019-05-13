@@ -108,8 +108,8 @@ module Payments
         perform(GetFees, manifest: manifest)
       end
 
-      def get_receipt_enrichment(receipt_number)
-        perform(GetReceiptEnrichment, receipt_number: receipt_number)
+      def get_receipt_enrichment(order_id)
+        perform(GetReceiptEnrichment, order_id: order_id)
       end
 
       private
